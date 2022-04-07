@@ -76,6 +76,10 @@ def verifyDelzant(vert, nA, nB):
   # find the determinant 
   return abs((edgeA[0] * edgeB[1]) - (edgeB[0] * edgeA[1])) == 1
 
+#Verifies the Semitoric determinant condition for two edges
+#Returns "Hidden" if the vertex is a hidden corner
+#Returns "Fake" if the vertex is a fake corner
+#Returns "None" if the vertex is not a semitoric corner
 def verifySemitoric(vert, nA, nB):
   # compute the edges to compair
   edgeA = nA - vert
@@ -89,12 +93,12 @@ def verifySemitoric(vert, nA, nB):
   edgeB = edgeB / b
 
   # find the determinant
-  if abs((edgeA[0] * edgeB[1]) - (edgeB[0] * (edgeA[0] + edgeA[1]))) == 1:
+  if abs((edgeB[0] * edgeA[1]) - (edgeA[0] * (edgeB[0] + edgeB[1]))) == 1:
     return "Hidden"
-  elif abs((edgeA[0] * edgeB[1]) - (edgeB[0] * (edgeA[0] + edgeA[1]))) == 0:
+  elif abs((edgeB[0] * edgeA[1]) - (edgeA[0] * (edgeB[0] + edgeB[1]))) == 0:
     return "Fake"
   else:
-    return "None"
+    return "Not a semitoric corner"
 
 #This function will comput the  SL2(ℤ)  lengths of any two vertices of integer coordinates
 def getSL(vert, nVert):
